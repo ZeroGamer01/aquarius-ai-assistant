@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d18">
+<title>AQUARIUS AI ASSISTANT</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #080d18;
+  color: #f1f6ff;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 900px;
+  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  border-bottom: 1px solid #1d2b40;
+  background: #0c1422;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg,#00d9ff,#285bff);
+  color: white;
+  font-size: 23px;
+  box-shadow: 0 0 20px #008cff55;
+}
+
+.brand h2 {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.brand small {
+  display: block;
+  color: #55cfff;
+  font-size: 10px;
+  margin-top: 4px;
+  letter-spacing: 2px;
+}
+
+.new-chat {
+  background: #142b46;
+  border: 1px solid #28618e;
+  color: #72d9ff;
+  padding: 10px 13px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  padding: 25px 16px 130px;
+}
+
+.welcome {
+  text-align: center;
+  margin: 55px auto 35px;
+}
+
+.welcome-logo {
+  font-size: 55px;
+  margin-bottom: 18px;
+}
+
+.welcome h1 {
+  font-size: 27px;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg,#42e5ff,#728bff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome p {
+  color: #9aaec8;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.prompts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.prompt {
+  background: #101d30;
+  border: 1px solid #243c58;
+  border-radius: 13px;
+  padding: 16px;
+  color: #d5e8ff;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.prompt:hover {
+  border-color: #20baff;
+}
+
+.messages {
+  max-width: 700px;
+  margin: auto;
+}
+
+.message {
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 17px;
+  max-width: 88%;
+  line-height: 1.6;
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.user {
+  background: #164b79;
+  margin-left: auto;
+  border: 1px solid #267db9;
+}
+
+.assistant {
+  background: #111e30;
+  border: 1px solid #263e58;
+  margin-right: auto;
+}
+
+.message-label {
+  color: #56cfff;
+  font-size: 11px;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+.composer-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent,#080d18 20%);
+  padding: 20px 15px 25px;
+}
+
+.composer {
+  max-width: 760px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #111e30;
+  border: 1px solid #315477;
+  border-radius: 17px;
+  padding: 9px 10px;
+  box-shadow: 0 0 25px #008cff15;
+}
+
+.composer input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 14px;
+  padding: 10px 4px;
+}
+
+.composer input::placeholder {
+  color: #8496ae;
+}
+
+.send {
+  background: linear-gradient(135deg,#00c9ed,#315bff);
+  border: none;
+  color: white;
+  border-radius: 12px;
+  width: 43px;
+  height: 43px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.footer {
+  text-align: center;
+  color: #71849c;
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+@media(max-width:420px) {
+  .welcome h1 {font-size: 23px;}
+  .prompts {gap: 8px;}
+  .prompt {padding: 12px;font-size: 12px;}
+  .brand h2 {font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>
+  <div class="brand">
+    <div class="logo">♒</div>
+    <div>
+      <h2>AQUARIUS AI</h2>
+      <small>INTELLIGENCE BEYOND LIMITS</small>
+    </div>
+  </div>
+  <button class="new-chat" onclick="newChat()">＋ New Chat</button>
+</header>
+
+<main>
+  <section class="welcome" id="welcome">
+    <div class="welcome-logo">♒</div>
+    <h1>Hello, Welcome to Aquarius</h1>
+    <p>Your personal AI assistant.<br>
+    Ask anything. Explore everything.</p>
+  </section>
+
+  <section class="prompts" id="prompts">
+    <button class="prompt" onclick="suggest('Explain artificial intelligence in simple words')">
+      ✨ Explain something to me
+    </button>
+    <button class="prompt" onclick="suggest('Help me write a professional email')">
+      ✍️ Write something for me
+    </button>
+    <button class="prompt" onclick="suggest('Give me some creative business ideas')">
+      💡 Generate new ideas
+    </button>
+    <button class="prompt" onclick="suggest('Teach me something interesting about space')">
+      🌌 Explore something new
+    </button>
+  </section>
+
+  <section class="messages" id="messages"></section>
+</main>
+
+<div class="composer-area">
+  <form class="composer" id="chatForm">
+    <input
+      type="text"
+      id="userInput"
+      placeholder="Message Aquarius AI..."
+      autocomplete="off"
+      required
+    >
+    <button class="send" type="submit">➤</button>
+  </form>
+  <div class="footer">
+    Aquarius AI • Your personal intelligent assistant
+  </div>
+</div>
+
+</div>
+
+<script>
+const input = document.getElementById("userInput");
+const messages = document.getElementById("messages");
+const welcome = document.getElementById("welcome");
+const prompts = document.getElementById("prompts");
+
+function addMessage(text, type) {
+  const message = document.createElement("div");
+  message.className = "message " + type;
+
+  const label = document.createElement("div");
+  label.className = "message-label";
+  label.textContent = type === "user" ? "YOU" : "AQUARIUS AI";
+
+  const content = document.createElement("div");
+  content.textContent = text;
+
+  message.appendChild(label);
+  message.appendChild(content);
+  messages.appendChild(message);
+
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
+}
+
+function getDemoResponse(question) {
+  return "Thank you for your question! Aquarius AI is currently in its first development stage.\n\nYour message has been received successfully. The next development stage will connect a real AI model so I can answer your questions intelligently.\n\nYour question: " + question;
+}
+
+function sendMessage(text) {
+  const question = text.trim();
+  if (!question) return;
+
+  welcome.style.display = "none";
+  prompts.style.display = "none";
+
+  addMessage(question, "user");
+  input.value = "";
+
+  setTimeout(() => {
+    addMessage(getDemoResponse(question), "assistant");
+  }, 500);
+}
+
+document.getElementById("chatForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  sendMessage(input.value);
+});
+
+function suggest(text) {
+  sendMessage(text);
+}
+
+function newChat() {
+  messages.innerHTML = "";
+  welcome.style.display = "block";
+  prompts.style.display = "grid";
+  input.value = "";
+}
+</script>
+
+</body>
+                                    </html>
+                                    
